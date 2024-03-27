@@ -49,4 +49,9 @@ public class DatabaseService {
 
         return moviesList;
     }
+
+    public void incrementMovieCount(Movie movie) {
+        movie.addCount();
+        movieRepo.saveMovie(movie);
+    }
 }

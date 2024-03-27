@@ -127,6 +127,10 @@ public class Movie {
         this.count = count;
     }
 
+    public void addCount() {
+        this.count++;
+    }
+
     @Override
     public String toString() {
         return "Movie [movieId=" + movieId + ", title=" + title + ", year=" + year + ", rated=" + rated

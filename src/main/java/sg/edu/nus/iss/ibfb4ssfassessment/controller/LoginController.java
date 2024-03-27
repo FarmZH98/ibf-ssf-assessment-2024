@@ -23,8 +23,13 @@ public class LoginController {
     // TODO: Task 6
     @GetMapping(path={"/", "/login"})
     public String login(HttpSession session, Model model) {
+        
+        if(null == session.getAttribute("login")) {
+            model.addAttribute("login", new Login());
+        } else {
+            model.addAttribute("login", (Login) session.getAttribute("login"));
+        }
 
-        model.addAttribute("login", new Login());
         return "view0";
 
     }
