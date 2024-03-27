@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>View 2: Movies Listing</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    </head>
+    <body>
+        <h2>List of Movies </h2>
+        <a href="/logout" class="btn btn-secondary">Logout</a>
+        <table class="moviesList">
+			<thead>
+				<tr>
+					<th>Movie ID</th>
+					<th>Movie Title</th>
+					<th>Movie Year</th>
+                    <th>Rated</th>
+					<th>Released On</th>
+                    <th>Runtime</th>
+					<th>Genre</th>
+                    <th>Director</th>
+                    <th>Rating</th>
+                    <th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr data-th-each="i: ${moviesList}">
+					<td> 
+						<span data-th-text="${i.movieId}"></span>	
+					</td>
+					<td> 
+						<span data-th-text="${i.title}"></span>	
+					</td>
+                    <td> 
+						<span data-th-text="${i.year}"></span>	
+					</td>
+                    <td> 
+						<span data-th-text="${i.rated}"></span>	
+					</td>
+                    <td> 
+						<span data-th-text="${#dates.format(i.formattedReleaseDate, 'dd-MMM-yyyy')}"></span>	
+					</td>
+                    <td> 
+						<span data-th-text="${i.runTime}"></span>	
+					</td>
+                    <td> 
+						<span data-th-text="${i.genre}"></span>	
+					</td>
+                    <td> 
+						<span data-th-text="${i.director}"></span>	
+					</td>
+                    <td> 
+						<span data-th-text="${i.rating}"></span>	
+					</td>
+                    <td>
+                        <a class="btn btn-primary" data-th-href="@{/book/{id}(id=${i.movieId})}">Book</a>
+                    </td>
+				</tr>
+			</tbody>
+		</table>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    </body>
+</html>

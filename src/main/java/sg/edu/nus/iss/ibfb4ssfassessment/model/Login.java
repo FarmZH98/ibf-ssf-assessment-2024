@@ -39,6 +39,12 @@ public class Login {
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
+
+    @Override
+    public String toString() {
+        return "Login [email=" + email + ", birthDate=" + birthDate + "]";
+    }
+    
     
     
 }

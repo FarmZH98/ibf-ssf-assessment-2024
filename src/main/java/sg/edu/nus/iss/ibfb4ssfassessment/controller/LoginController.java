@@ -23,10 +23,6 @@ public class LoginController {
     // TODO: Task 6
     @GetMapping(path={"/", "/login"})
     public String login(HttpSession session, Model model) {
-        if(null == session.getAttribute("loginEmail") || null == session.getAttribute("loginBirthDate")) {
-            session.setAttribute("loginEmail", 1);
-            session.setAttribute("loginBirthDate", 1);
-        }
 
         model.addAttribute("login", new Login());
         return "view0";
@@ -39,12 +35,6 @@ public class LoginController {
 
         ModelAndView mav = new ModelAndView("view1");
 
-        //this condition should not happen
-        if(null == session.getAttribute("loginEmail") || null == session.getAttribute("loginBirthDate")) {
-            session.setAttribute("loginEmail", 1);
-            session.setAttribute("loginBirthDate", 1);
-        }
-
         if (binding.hasErrors()) {
             System.out.println("binding error: >> " + binding.getAllErrors());
             mav.setViewName("view0.html");
@@ -53,20 +43,23 @@ public class LoginController {
         }
 
         
-        session.setAttribute("loginEmail", login.getEmail());
-        session.setAttribute("loginBirthDate", login.getBirthDate());
+        session.setAttribute("login", login);
 
-        System.out.println("login email in session: >>> " + session.getAttribute("loginEmail"));
-        System.out.println("login birth date in session: >>> " + session.getAttribute("loginBirthDate"));
+        System.out.println("login: >>> " + session.getAttribute("login").toString());
 
         return mav;
     }
     
 
-    // // For the logout button shown on View 2
-    // // On logout, session should be cleared
-    // public String logout() {
+    // For the logout button shown on View 2
+    // On logout, session should be cleared
+    @GetMapping(path = {"/logout"})
+    public ModelAndView logout(HttpSession session) {
 
-    // }
+        ModelAndView mav = new ModelAndView("redirect:/");
+        session.invalidate();
+        
+        return mav;
+    }
     
 }
