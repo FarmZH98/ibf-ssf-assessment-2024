@@ -61,6 +61,7 @@ public class MovieController {
         Movie movieToBook = databaseService.getMovieById(Integer.parseInt(id));
 
         if(movieToBook.getRated().equals("R") && userAge < 18 || movieToBook.getRated().equals("PG-13") && userAge < 13) {
+            System.out.println("Booking Error... User age: " + userAge);
             mav.setViewName("BookError");
             return mav;
         }
