@@ -29,6 +29,7 @@ public class MovieController {
         ModelAndView mav = new ModelAndView();
         if(null == session.getAttribute("login")) {
             mav.setViewName("redirect:/");
+            System.out.println("No HttpSession established. Redirect to login page...");
             return mav;
         }
 
@@ -47,6 +48,7 @@ public class MovieController {
         ModelAndView mav = new ModelAndView("");
         if(null == session.getAttribute("login")) {
             mav.setViewName("redirect:/");
+            System.out.println("No HttpSession established. Redirect to login page...");
             return mav;
         }
 

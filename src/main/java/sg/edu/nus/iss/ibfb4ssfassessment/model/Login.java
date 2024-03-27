@@ -56,7 +56,7 @@ public class Login {
     //this allows jakarta validation to be accurate as the time input by user is default to 00:00 which means present date will be ok to insert
     public void setBirthDate(Date birthDate) {
         long dateLong = birthDate.getTime() + 86340000 + 59000;
-        System.out.println("birthdate + 23hr59min: >>> " + new Date(dateLong));
+        System.out.println("birthdate + 23hr59min59sec: >>> " + new Date(dateLong));
         this.birthDate = new Date(dateLong);
     }
 
