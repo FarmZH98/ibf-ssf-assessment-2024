@@ -32,12 +32,28 @@ public class Login {
         this.email = email;
     }
 
+    // public String getBirthDate() {
+    //     if(birthDate == null) return null;
+    //     DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+    //     return df.format(birthDate);
+    // }
+
     public Date getBirthDate() {
         return birthDate;
     }
 
+    //birthDateString format: dd/mm/yyyy as accordance to task 6
+    // public void setBirthDate(String birthDateString) throws ParseException {
+    //     Date date = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).parse(birthDateString);
+    //     System.out.println(date);
+    //     this.birthDate = date;
+    // }
+
+    //this method is used by thymeleaf to ensure current date cannot be entered by setting the time of date or birth to be 23:59
     public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
+        long dateLong = birthDate.getTime() + 86340000;
+        System.out.println("birthdate + 23hr59min: >>> " + new Date(dateLong));
+        this.birthDate = new Date(dateLong);
     }
 
     @Override

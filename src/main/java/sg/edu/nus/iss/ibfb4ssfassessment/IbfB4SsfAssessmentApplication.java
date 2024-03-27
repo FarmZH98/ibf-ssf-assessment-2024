@@ -34,8 +34,8 @@ public class IbfB4SsfAssessmentApplication implements CommandLineRunner {
 			//System.out.println(moviesList.get(i).toString());
 			databaseService.saveRecord(moviesList.get(i));
 		}
-		System.out.println("Number of movies in Redis >>> " + databaseService.getNumberOfMovies());
-		System.out.println("Testing getting movie with ID from REDIS >>> " + databaseService.getMovieById(12341));
+		// System.out.println("Number of movies in Redis >>> " + databaseService.getNumberOfMovies());
+		// System.out.println("Testing getting movie with ID from REDIS >>> " + databaseService.getMovieById(12341));
 		System.out.println("Testing getting all movies from REDIS >>> " + databaseService.getAllMovies());
 	}
 
