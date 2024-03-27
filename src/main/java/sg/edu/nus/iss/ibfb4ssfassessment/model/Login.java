@@ -1,5 +1,8 @@
 package sg.edu.nus.iss.ibfb4ssfassessment.model;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -49,9 +52,10 @@ public class Login {
     //     this.birthDate = date;
     // }
 
-    //this method is used by thymeleaf to ensure current date cannot be entered by setting the time of date or birth to be 23:59
+    //hard set the time for date of birth to be 23:59:59
+    //this allows jakarta validation to be accurate as the time input by user is default to 00:00 which means present date will be ok to insert
     public void setBirthDate(Date birthDate) {
-        long dateLong = birthDate.getTime() + 86340000;
+        long dateLong = birthDate.getTime() + 86340000 + 59000;
         System.out.println("birthdate + 23hr59min: >>> " + new Date(dateLong));
         this.birthDate = new Date(dateLong);
     }
@@ -61,6 +65,13 @@ public class Login {
         return "Login [email=" + email + ", birthDate=" + birthDate + "]";
     }
     
-    
+    //referred to StackOverflow: https://stackoverflow.com/questions/1116123/how-do-i-calculate-someones-age-in-java
+    public Integer getAge() {
+        LocalDate loginBirthLocalDate = this.birthDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate todayDate = (new Date()).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        Integer userAge =  Period.between(loginBirthLocalDate, todayDate).getYears();
+
+        return userAge;
+    }
     
 }

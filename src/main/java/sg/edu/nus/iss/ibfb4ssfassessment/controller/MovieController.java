@@ -1,9 +1,5 @@
 package sg.edu.nus.iss.ibfb4ssfassessment.controller;
 
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +7,6 @@ import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -49,20 +44,17 @@ public class MovieController {
     @GetMapping(path={"/book/{id}"})
     public ModelAndView bookMovie(HttpSession session, @PathVariable("id") String id)  {
 
-        ModelAndView mav = new ModelAndView("view2");
+        ModelAndView mav = new ModelAndView("");
         if(null == session.getAttribute("login")) {
             mav.setViewName("redirect:/");
             return mav;
         }
-        Login login = (Login) session.getAttribute("login");
-        System.out.println("bookMovie() >>>" + id);
-        System.out.println("bookMovie(): Login Info >>>" + login.toString());
 
-        //referred to StackOverflow: https://stackoverflow.com/questions/1116123/how-do-i-calculate-someones-age-in-java
-        LocalDate loginBirthLocalDate = login.getBirthDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        LocalDate todayDate = (new Date()).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        Integer userAge =  Period.between(loginBirthLocalDate, todayDate).getYears();
-        System.out.println("Login age: >>>" + userAge);
+        Login login = (Login) session.getAttribute("login");
+        Integer userAge =  login.getAge();
+
+        System.out.println("bookMovie(): Login Info >>>" + login.toString());
+        System.out.println("bookMovie(): MovieID >>>" + id);
 
         Movie movieToBook = databaseService.getMovieById(Integer.parseInt(id));
 
